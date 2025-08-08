@@ -75,7 +75,7 @@ exports.contactUsEmail = (
     <body>
         <div class="container">
             <a href="https://studynotion-edtech-project.vercel.app"><img class="logo"
-                    src="https://i.ibb.co/7Xyj3PC/logo.png" alt="StudyNotion Logo"></a>
+                    src="https://s3-figma-hubfile-images-production.figma.com/hub/file/carousel/img/c1d49b7ee2e6d6b0c03146ab9e49efcf1b383e5e" alt="StudyNotion Logo"></a>
             <div class="message">Contact Form Confirmation</div>
             <div class="body">
                 <p>Dear ${firstname} ${lastname},</p>
