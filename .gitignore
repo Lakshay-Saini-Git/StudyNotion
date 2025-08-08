@@ -1,0 +1,24 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Testing
+coverage/
+
+# Production Build
+build/
+
+# Miscellaneous
+.DS_Store
+
+# Ignore environment files (contain secrets and API keys)
+.env
+.env.*  # Covers .env.local, .env.development, .env.production, .env.test, etc.
+
+# Debug Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
