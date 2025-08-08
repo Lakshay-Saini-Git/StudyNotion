@@ -67,7 +67,7 @@ exports.courseEnrollmentEmail = (courseName, name) => {
     
     <body>
         <div class="container">
-            <a href="https://studynotion-edtech-project.vercel.app"><img class="logo" src="https://s3-figma-hubfile-images-production.figma.com/hub/file/carousel/img/c1d49b7ee2e6d6b0c03146ab9e49efcf1b383e5e"
+            <a href="https://study-notion-sable-mu.vercel.app"><img class="logo" src="https://s3-figma-hubfile-images-production.figma.com/hub/file/carousel/img/c1d49b7ee2e6d6b0c03146ab9e49efcf1b383e5e"
                     alt="StudyNotion Logo"></a>
             <div class="message">Course Registration Confirmation</div>
             <div class="body">
@@ -76,7 +76,7 @@ exports.courseEnrollmentEmail = (courseName, name) => {
                     are excited to have you as a participant!</p>
                 <p>Please log in to your learning dashboard to access the course materials and start your learning journey.
                 </p>
-                <a class="cta" href="https://studynotion-edtech-project.vercel.app/dashboard">Go to Dashboard</a>
+                <a class="cta" href="https://study-notion-sable-mu.vercel.app/dashboard">Go to Dashboard</a>
             </div>
             <div class="support">If you have any questions or need assistance, please feel free to reach out to us at <a
                     href="mailto:lakshaysaini8445@gmail.com">info@studynotion.com</a>. We are here to help!</div>
