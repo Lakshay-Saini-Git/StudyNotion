@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react"
 import ReactStars from "react-rating-stars-component"
 // Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react"
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/pagination";
-import { Autoplay, FreeMode, Navigation, Pagination } from "swiper/modules";
-
-
-
+// Import Swiper styles
+import "swiper/css"
+import "swiper/css/free-mode"
+import "swiper/css/pagination"
+import "../../App.css"
 // Icons
-import { FaStar } from "react-icons/fa"
+import { FaStar, FaQuoteLeft } from "react-icons/fa"
+// Import required modules
+import { Autoplay, FreeMode, Pagination } from "swiper/modules"
 
 // Get apiFunction and the endpoint
 import { apiConnector } from "../../services/apiconnector"
@@ -28,76 +28,114 @@ function ReviewSlider() {
         ratingsEndpoints.REVIEWS_DETAILS_API
       )
       if (data?.success) {
-        setReviews(data?.data)
+        // Sort reviews by rating (highest to lowest)
+        const sortedReviews = [...data.data].sort((a, b) => b.rating - a.rating)
+        setReviews(sortedReviews)
       }
     })()
   }, [])
 
-  // console.log(reviews)
-
   return (
-    <div className="text-white">
-      <div className="my-[50px] h-[184px] max-w-maxContentTab lg:max-w-maxContent">
+    <div className="w-full bg-richblack-900 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Swiper
-          slidesPerView={4}
-          spaceBetween={25}
+          spaceBetween={30}
+          slidesPerView={1}
           loop={true}
-          freeMode={true}
           autoplay={{
-            delay: 2500,
+            delay: 3000,
             disableOnInteraction: false,
           }}
-          modules={[FreeMode, Pagination, Autoplay]}
-          className="w-full "
+          pagination={{
+            clickable: true,
+          }}
+          breakpoints={{
+            640: {
+              slidesPerView: 1,
+            },
+            768: {
+              slidesPerView: 2,
+            },
+            1024: {
+              slidesPerView: 3,
+            },
+          }}
+          modules={[Pagination, Autoplay]}
+          className="w-full pb-12"
         >
-          {reviews.map((review, i) => {
-            return (
-              <SwiperSlide key={i}>
-                <div className="flex flex-col gap-3 bg-richblack-800 p-3 text-[14px] text-richblack-25">
-                  <div className="flex items-center gap-4">
+          {reviews.map((review, i) => (
+            <SwiperSlide key={i}>
+              <div className="h-full flex flex-col bg-richblack-800 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="relative">
                     <img
                       src={
                         review?.user?.image
                           ? review?.user?.image
                           : `https://api.dicebear.com/5.x/initials/svg?seed=${review?.user?.firstName} ${review?.user?.lastName}`
                       }
-                      alt=""
-                      className="h-9 w-9 rounded-full object-cover"
+                      alt={`${review?.user?.firstName} ${review?.user?.lastName}`}
+                      className="h-14 w-14 rounded-full border-2 border-yellow-400 object-cover"
                     />
-                    <div className="flex flex-col">
-                      <h1 className="font-semibold text-richblack-5">{`${review?.user?.firstName} ${review?.user?.lastName}`}</h1>
-                      <h2 className="text-[12px] font-medium text-richblack-500">
-                        {review?.course?.courseName}
-                      </h2>
+                    <div className="absolute -bottom-1 -right-1 bg-yellow-400 text-richblack-900 rounded-full p-1">
+                      <FaQuoteLeft className="h-3 w-3" />
                     </div>
                   </div>
-                  <p className="font-medium text-richblack-25">
+                  <div className="ml-4">
+                    <h3 className="text-base font-semibold text-white">
+                      {`${review?.user?.firstName} ${review?.user?.lastName}`}
+                    </h3>
+                    <p className="text-xs text-richblack-300">
+                      {review?.course?.courseName}
+                    </p>
+                    <div className="flex items-center mt-1">
+                      <ReactStars
+                        count={5}
+                        value={review.rating}
+                        size={14}
+                        edit={false}
+                        activeColor="#ffd700"
+                        emptyIcon={<FaStar />}
+                        filledIcon={<FaStar />}
+                      />
+                      <span className="text-yellow-400 text-sm ml-1">
+                        {review.rating.toFixed(1)}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="flex-grow">
+                  <p className="text-richblack-100 text-sm">
                     {review?.review.split(" ").length > truncateWords
-                      ? `${review?.review
+                      ? `"${review?.review
                           .split(" ")
                           .slice(0, truncateWords)
-                          .join(" ")} ...`
-                      : `${review?.review}`}
+                          .join(" ")}..."`
+                      : `"${review?.review}"`}
                   </p>
-                  <div className="flex items-center gap-2 ">
-                    <h3 className="font-semibold text-yellow-100">
-                      {review.rating.toFixed(1)}
-                    </h3>
+                </div>
+                
+                <div className="flex items-center mt-auto pt-4 border-t border-richblack-700">
+                  <div className="flex items-center">
                     <ReactStars
                       count={5}
                       value={review.rating}
                       size={20}
                       edit={false}
-                      activeColor="#ffd700"
-                      emptyIcon={<FaStar />}
-                      fullIcon={<FaStar />}
+                      activeColor="#f59e0b"
+                      emptyIcon={<FaStar className="inline" />}
+                      fullIcon={<FaStar className="inline" />}
+                      classNames="mr-2"
                     />
+                    <span className="ml-2 text-yellow-400 font-semibold">
+                      {review.rating.toFixed(1)}
+                    </span>
                   </div>
                 </div>
-              </SwiperSlide>
-            )
-          })}
-          {/* <SwiperSlide>Slide 1</SwiperSlide> */}
+              </div>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </div>
