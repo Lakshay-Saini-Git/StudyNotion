@@ -67,7 +67,7 @@ const otpTemplate = (otp) => {
 	<body>
 		<div class="container">
 			<a href="https://study-notion-sable-mu.vercel.app"><img class="logo"
-					src="https://s3-figma-hubfile-images-production.figma.com/hub/file/carousel/img/c1d49b7ee2e6d6b0c03146ab9e49efcf1b383e5e" alt="StudyNotion Logo"></a>
+					src="https://res.cloudinary.com/dsra1mc6w/image/upload/v1754737310/logo_vok309.png" alt="StudyNotion Logo"></a>
 			<div class="message">OTP Verification Email</div>
 			<div class="body">
 				<p>Dear User,</p>
